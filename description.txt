@@ -1,1 +1,5 @@
-Expanded Inventory is a pretty cool mod, it does...this. Modify this file with a description of your mod.
+Inspired by the Extensible Inventory mod by hamstar.
+
+Adds the ability to swap between pages of inventories using arrow buttons or the included hotkeys. Can massively increase the size of your inventory, or provide extra slots for all those items from other mods.
+
+The number of pages added can be changed in the config (default 2).
