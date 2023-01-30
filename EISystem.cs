@@ -31,10 +31,10 @@ namespace ExpandedInventory
 
         public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
         {
-            int mouseTextIndex = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Mouse Text"));
-            if (mouseTextIndex != -1)
+            int layerIndex = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Interface Logic 3"));
+            if (layerIndex != -1)
             {
-                layers.Insert(mouseTextIndex, new LegacyGameInterfaceLayer(
+                layers.Insert(layerIndex, new LegacyGameInterfaceLayer(
                     "ExpandedInventory: Expanded Inventory",
                     delegate
                     {

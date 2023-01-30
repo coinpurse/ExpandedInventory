@@ -56,6 +56,20 @@ namespace ExpandedInventory.UI
             this.AddOrRemoveChild(NextPageButton, Main.playerInventory);
             this.AddOrRemoveChild(PrevPageButton, Main.playerInventory);
             this.AddOrRemoveChild(PageNumberText, Main.playerInventory);
+
+            EIPlayer modPlayer = Main.LocalPlayer.GetModPlayer<EIPlayer>();
+            if(modPlayer.Player.chest != -1)
+            {
+                NextPageButton.Top.Pixels = Main.screenHeight - 505;
+                PrevPageButton.Top.Pixels = Main.screenHeight - 505;
+                PageNumberText.Top.Pixels = Main.screenHeight - 505;
+            }
+            else
+            {
+                NextPageButton.Top.Pixels = Main.screenHeight - 680;
+                PrevPageButton.Top.Pixels = Main.screenHeight - 680;
+                PageNumberText.Top.Pixels = Main.screenHeight - 680;
+            }
             base.Update(gameTime);
         }
 

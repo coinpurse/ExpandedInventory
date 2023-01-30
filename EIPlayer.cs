@@ -38,6 +38,7 @@ namespace ExpandedInventory
                 itemPages[currPageNum - 1].RemoveAt(i);
                 itemPages[currPageNum - 1].Insert(i, oldItem);
             }
+            Recipe.FindRecipes();
         }
 
         /// <summary>
@@ -48,15 +49,31 @@ namespace ExpandedInventory
         {
             int previousPage = currentPage;
 
-            if (isForward && currentPage < numOfPages)
+            if (isForward)
             {
-                currentPage++;
-                goToPage(currentPage, previousPage);
+                if (currentPage >= numOfPages)
+                {
+                    currentPage = 1;
+                    goToPage(1, previousPage);
+                }
+                else
+                {
+                    currentPage++;
+                    goToPage(currentPage, previousPage);
+                }
             }
-            else if (!isForward && currentPage > 1)
+            else if (!isForward)
             {
-                currentPage--;
-                goToPage(currentPage, previousPage);
+                if (currentPage <= 1)
+                {
+                    currentPage = numOfPages;
+                    goToPage(numOfPages, previousPage);
+                }
+                else
+                {
+                    currentPage--;
+                    goToPage(currentPage, previousPage);
+                }
             }
         }
 
