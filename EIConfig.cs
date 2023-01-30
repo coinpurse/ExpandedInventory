@@ -1,0 +1,25 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Terraria.ModLoader.Config;
+
+namespace ExpandedInventory
+{
+    public class EIConfig : ModConfig
+    {
+        public override ConfigScope Mode => ConfigScope.ServerSide;
+
+
+        [DefaultValue(2)]
+        [Label("Number of Pages")]
+        public int NumberOfPages { get; set; } = 2;
+
+        public override void OnLoaded()
+        {
+            ExpandedInventory.Config = this;
+        }
+    }
+}

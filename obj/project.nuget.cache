@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "vF26rB4OXAP6qeuZ15ZJb2XDaarcqJG1Inq73hwZhdnP4Q8RsUIGbaur03ChOFt6xb/cgHLelv8mCsUumDsYUw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Tyler\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\ExpandedInventory\\ExpandedInventory.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Tyler\\.nuget\\packages\\tmodloader.codeassist\\0.1.5\\tmodloader.codeassist.0.1.5.nupkg.sha512"
+  ],
+  "logs": []
+}

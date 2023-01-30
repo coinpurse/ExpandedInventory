@@ -1,0 +1,3 @@
+displayName = Expanded Inventory
+author = CoinPurse
+version = 0.1
