@@ -58,7 +58,7 @@ namespace ExpandedInventory.UI
 
             
             EIPlayer modPlayer = Main.LocalPlayer.GetModPlayer<EIPlayer>();
-            if(modPlayer.Player.chest != -1)
+            if(modPlayer.Player.chest != -1 || Main.npcShop > 0)
             {
                 NextPageButton.Top.Pixels = (float)yPosChest;
                 PrevPageButton.Top.Pixels = (float)yPosChest;
