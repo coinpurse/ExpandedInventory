@@ -7,6 +7,7 @@ namespace ExpandedInventory
 	public class ExpandedInventory : Mod
 	{
 		internal static EIConfig Config;
+        internal static EIClientConfig ClientConfig;
 		public ExpandedInventory()
 		{
 
@@ -16,6 +17,7 @@ namespace ExpandedInventory
         {
             base.Unload();
             Config = null;
+            ClientConfig = null;
         }
     }
 }

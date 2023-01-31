@@ -18,6 +18,11 @@ namespace ExpandedInventory.UI
         public EIPageButton NextPageButton;
         public EIPageButton PrevPageButton;
         public EIPageNumberText PageNumberText;
+
+        private decimal xPos;
+        private decimal yPos;
+        private decimal xPosChest;
+        private decimal yPosChest;
         public override void OnInitialize()
         {
             NextPageButton = new EIPageButton(ModContent.Request<Texture2D>("ExpandedInventory/Resources/NextPageButton"), true);
@@ -26,28 +31,17 @@ namespace ExpandedInventory.UI
 
             setButtonProperties(NextPageButton, true);
             setButtonProperties(PrevPageButton, false);
-            setTextProperties();
-
             
             Append(NextPageButton);
             Append(PrevPageButton);
             Append(PageNumberText);
         }
 
-        private void setTextProperties()
-        {
-            PageNumberText.Left.Set(Main.screenWidth - PageNumberText.Width.Pixels - 1500, 0f);
-            PageNumberText.Top.Pixels = Main.screenHeight - 630;
-        }
+
         private void setButtonProperties(EIPageButton button, bool direction)
         {
             button.Width.Set(30, 0f);
             button.Height.Set(35, 0f);
-            if(direction)
-                button.Left.Set(Main.screenWidth - 1450, 0f);
-            else
-                button.Left.Set(Main.screenWidth - 1550, 0f);
-            button.Top.Pixels = Main.screenHeight - 630;
             button.OnClick += (a, b) => changePage(button.IsNextButton);
         }
 
@@ -57,18 +51,32 @@ namespace ExpandedInventory.UI
             this.AddOrRemoveChild(PrevPageButton, Main.playerInventory);
             this.AddOrRemoveChild(PageNumberText, Main.playerInventory);
 
+            yPos = Main.screenHeight * (ExpandedInventory.ClientConfig.PositionY / 100m);
+            xPos = Main.screenWidth * (ExpandedInventory.ClientConfig.PositionX / 100m);
+            yPosChest = Main.screenHeight * (ExpandedInventory.ClientConfig.PositionYWithChest / 100m);
+            xPosChest = Main.screenWidth * (ExpandedInventory.ClientConfig.PositionXWithChest / 100m);
+
+            
             EIPlayer modPlayer = Main.LocalPlayer.GetModPlayer<EIPlayer>();
             if(modPlayer.Player.chest != -1)
             {
-                NextPageButton.Top.Pixels = Main.screenHeight - 505;
-                PrevPageButton.Top.Pixels = Main.screenHeight - 505;
-                PageNumberText.Top.Pixels = Main.screenHeight - 505;
+                NextPageButton.Top.Pixels = (float)yPosChest;
+                PrevPageButton.Top.Pixels = (float)yPosChest;
+                PageNumberText.Top.Pixels = (float)yPosChest;
+
+                NextPageButton.Left.Set((float)xPosChest + 50, 0f);
+                PrevPageButton.Left.Set((float)xPosChest - 50, 0f);
+                PageNumberText.Left.Set((float)xPosChest, 0f);
             }
             else
             {
-                NextPageButton.Top.Pixels = Main.screenHeight - 680;
-                PrevPageButton.Top.Pixels = Main.screenHeight - 680;
-                PageNumberText.Top.Pixels = Main.screenHeight - 680;
+                NextPageButton.Top.Pixels = (float)yPos;
+                PrevPageButton.Top.Pixels = (float)yPos;
+                PageNumberText.Top.Pixels = (float)yPos;
+
+                NextPageButton.Left.Set((float)xPos + 50, 0f);
+                PrevPageButton.Left.Set((float)xPos - 50, 0f);
+                PageNumberText.Left.Set((float)xPos, 0f);
             }
             base.Update(gameTime);
         }
