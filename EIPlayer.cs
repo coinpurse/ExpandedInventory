@@ -1,8 +1,8 @@
-﻿using Microsoft.Xna.Framework.Input;
+﻿using ExpandedInventory.UI;
+using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.GameInput;
-using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 
@@ -16,6 +16,8 @@ namespace ExpandedInventory
         private List<Item>[] itemPages;
         private int numOfPages;
         private int currentPage;
+
+        private EIUIState pageUI;
 
         /// <summary>
         /// Loads the given page into the player's inventory. Saves the previous inventory to the current page.
@@ -81,6 +83,10 @@ namespace ExpandedInventory
         {
             return currentPage.ToString() + "/" + numOfPages.ToString();
         }
+        public void SetPageUI(EIUIState eiUIState)
+        {
+            pageUI = eiUIState;
+        }
         public override void Initialize()
         {
             numOfPages = ExpandedInventory.Config.NumberOfPages;
@@ -98,6 +104,17 @@ namespace ExpandedInventory
                 }
             }
         }
+
+        public override bool CanUseItem(Item item)
+        {
+            if(Main.playerInventory && pageUI.IsHoveringButtons())
+            {
+                return false;
+            }
+
+            return base.CanUseItem(item);
+        }
+
 
         public override void Load()
         {

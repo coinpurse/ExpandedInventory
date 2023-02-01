@@ -1,19 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Linq;
 using Terraria;
-using Terraria.ID;
-using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.UI;
-using ReLogic.Content;
 using Terraria.ModLoader.UI;
-using Terraria.GameContent.UI.Elements;
 
 namespace ExpandedInventory.UI
 {
-    internal class EIUIState : UIState
+    public class EIUIState : UIState
     {
         public EIPageButton NextPageButton;
         public EIPageButton PrevPageButton;
@@ -23,6 +17,11 @@ namespace ExpandedInventory.UI
         private decimal yPos;
         private decimal xPosChest;
         private decimal yPosChest;
+
+        public bool IsHoveringButtons()
+        {
+            return NextPageButton.IsMouseHovering || PrevPageButton.IsMouseHovering;
+        }
         public override void OnInitialize()
         {
             NextPageButton = new EIPageButton(ModContent.Request<Texture2D>("ExpandedInventory/Resources/NextPageButton"), true);
@@ -58,6 +57,7 @@ namespace ExpandedInventory.UI
 
             
             EIPlayer modPlayer = Main.LocalPlayer.GetModPlayer<EIPlayer>();
+            modPlayer.SetPageUI(this);
             if(modPlayer.Player.chest != -1 || Main.npcShop > 0)
             {
                 NextPageButton.Top.Pixels = (float)yPosChest;
