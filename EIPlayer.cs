@@ -43,6 +43,14 @@ namespace ExpandedInventory
             Recipe.FindRecipes();
         }
 
+        private void saveCurrentPage(int currentPage)
+        {
+            for(int i = 0; i < itemPages[currentPage - 1].Count; i++)
+            {
+                itemPages[currentPage - 1].RemoveAt(i);
+                itemPages[currentPage - 1].Insert(i, Player.inventory[i]);
+            }
+        }
         /// <summary>
         /// Increments/Decrements the page by 1 depending on the argument. Will update the player's inventory.
         /// </summary>
@@ -144,13 +152,14 @@ namespace ExpandedInventory
         {
             if (currentPage != 1)
             {
-                currentPage = 1;
                 goToPage(1, currentPage);
+                currentPage = 1;
             }
         }
 
         public override void SaveData(TagCompound tag)
         {
+            saveCurrentPage(currentPage);
 
             tag["CurrentPage"] = currentPage;
             for(int i = 1; i <= numOfPages;i++)
