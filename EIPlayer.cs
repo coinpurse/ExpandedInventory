@@ -19,6 +19,8 @@ namespace ExpandedInventory
 
         private EIUIState pageUI;
 
+       // public ItemIndexLibrary ItemLibrary;
+
         /// <summary>
         /// Loads the given page into the player's inventory. Saves the previous inventory to the current page.
         /// </summary>
@@ -47,10 +49,16 @@ namespace ExpandedInventory
         {
             for(int i = 0; i < itemPages[currentPage - 1].Count; i++)
             {
+                if (i < 10 || i > 49)
+                {
+                    continue;
+                }
+
                 itemPages[currentPage - 1].RemoveAt(i);
                 itemPages[currentPage - 1].Insert(i, Player.inventory[i]);
             }
         }
+
         /// <summary>
         /// Increments/Decrements the page by 1 depending on the argument. Will update the player's inventory.
         /// </summary>
@@ -64,12 +72,10 @@ namespace ExpandedInventory
                 if (currentPage >= numOfPages)
                 {
                     currentPage = 1;
-                    goToPage(1, previousPage);
                 }
                 else
                 {
                     currentPage++;
-                    goToPage(currentPage, previousPage);
                 }
             }
             else if (!isForward)
@@ -77,19 +83,23 @@ namespace ExpandedInventory
                 if (currentPage <= 1)
                 {
                     currentPage = numOfPages;
-                    goToPage(numOfPages, previousPage);
                 }
                 else
                 {
                     currentPage--;
-                    goToPage(currentPage, previousPage);
                 }
             }
+
+            goToPage(currentPage, previousPage);
         }
 
         public string GetPageString()
         {
             return currentPage.ToString() + "/" + numOfPages.ToString();
+        }
+        public int GetCurrentPage()
+        {
+            return currentPage;
         }
         public void SetPageUI(EIUIState eiUIState)
         {
@@ -101,6 +111,7 @@ namespace ExpandedInventory
             currentPage = 1;
 
             itemPages = new List<Item>[numOfPages];
+           // ItemLibrary = new ItemIndexLibrary();
 
             for(int i = 0; i < numOfPages; i++)
             {
@@ -146,6 +157,8 @@ namespace ExpandedInventory
                         itemPages[i - 1] = itemList;
                 }
             }
+
+            //ItemLibrary.UpdateIndexLibraryFull(itemPages, numOfPages);
         }
 
         public override void OnEnterWorld(Player player)
@@ -167,7 +180,7 @@ namespace ExpandedInventory
                 tag["InventoryPage" + i.ToString()] = itemPages[i - 1];
             }
         }
-
+        
         public override void ProcessTriggers(TriggersSet triggersSet)
         {
             if (NextPage.JustPressed)
