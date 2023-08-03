@@ -10,7 +10,6 @@ namespace ExpandedInventory
 
 
         [DefaultValue(2)]
-        [Label("Number of Pages")]
         [ReloadRequired]
         public int NumberOfPages { get; set; } = 2;
 

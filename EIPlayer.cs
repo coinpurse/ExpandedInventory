@@ -161,7 +161,7 @@ namespace ExpandedInventory
             //ItemLibrary.UpdateIndexLibraryFull(itemPages, numOfPages);
         }
 
-        public override void OnEnterWorld(Player player)
+        public override void OnEnterWorld()
         {
             if (currentPage != 1)
             {

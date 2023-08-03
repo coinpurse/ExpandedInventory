@@ -41,7 +41,7 @@ namespace ExpandedInventory.UI
         {
             button.Width.Set(30, 0f);
             button.Height.Set(35, 0f);
-            button.OnClick += (a, b) => changePage(button.IsNextButton);
+            button.OnLeftClick += (a, b) => changePage(button.IsNextButton);
         }
 
         public override void Update(GameTime gameTime)

@@ -1,0 +1,39 @@
+Keybinds: {
+	"Next Item Page.DisplayName": Next  Item  Page
+	"Previous Item Page.DisplayName": Previous  Item  Page
+}
+
+Configs: {
+	EIClientConfig: {
+		DisplayName: E I Client Config
+
+		PositionX: {
+			Label: X position
+			Tooltip: X position in percent of screen width.
+		}
+
+		PositionY: {
+			Label: Y position
+			Tooltip: Y position in percent of screen height.
+		}
+
+		PositionXWithChest: {
+			Label: X position with chest
+			Tooltip: X position in percent of screen width. Use this to change the position when a chest is opened.
+		}
+
+		PositionYWithChest: {
+			Label: Y position with chest
+			Tooltip: Y position in percent of screen height. Use this to change the position when a chest is opened.
+		}
+	}
+
+	EIConfig: {
+		DisplayName: E I Config
+
+		NumberOfPages: {
+			Label: Number of Pages
+			Tooltip: ""
+		}
+	}
+}
