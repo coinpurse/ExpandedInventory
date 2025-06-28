@@ -13,7 +13,7 @@ namespace ExpandedInventory
         public static ModKeybind NextPage;
         public static ModKeybind PrevPage;
 
-        private List<Item>[] itemPages;
+        private List<List<Item>> itemPages;
         private int numOfPages;
         private int currentPage;
 
@@ -110,14 +110,14 @@ namespace ExpandedInventory
             numOfPages = ExpandedInventory.Config.NumberOfPages;
             currentPage = 1;
 
-            itemPages = new List<Item>[numOfPages];
+            itemPages = new List<List<Item>>();
            // ItemLibrary = new ItemIndexLibrary();
 
             for(int i = 0; i < numOfPages; i++)
             {
-                itemPages[i] = new List<Item>();
+                itemPages.Add(new List<Item>());
 
-                for(int x = 0; x < 59; x++)
+                for (int x = 0; x < 59; x++)
                 {
                     itemPages[i].Add(new Item());
                 }
@@ -148,14 +148,16 @@ namespace ExpandedInventory
                 currentPage = tag.Get<int>("CurrentPage");
             }
 
-            for(int i = 1; i <= numOfPages; i++)
+            for(int i = 1; tag.ContainsKey("InventoryPage" + i.ToString()); i++)
             {
-                if (tag.ContainsKey("InventoryPage" + i.ToString())) {
-                    List<Item> itemList = tag.Get<List<Item>>("InventoryPage" + i.ToString());
+                if(i > numOfPages)
+                    itemPages.Add(new List<Item>());
 
-                    if(itemList != null && itemList.Count != 0)
-                        itemPages[i - 1] = itemList;
-                }
+                List<Item> itemList = tag.Get<List<Item>>("InventoryPage" + i.ToString());
+
+                
+                if(itemList != null && itemList.Count != 0)
+                    itemPages[i - 1] = itemList;
             }
 
             //ItemLibrary.UpdateIndexLibraryFull(itemPages, numOfPages);
@@ -175,7 +177,7 @@ namespace ExpandedInventory
             saveCurrentPage(currentPage);
 
             tag["CurrentPage"] = currentPage;
-            for(int i = 1; i <= numOfPages;i++)
+            for(int i = 1; i <= itemPages.Count;i++)
             {
                 tag["InventoryPage" + i.ToString()] = itemPages[i - 1];
             }
